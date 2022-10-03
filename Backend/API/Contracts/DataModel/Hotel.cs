@@ -14,7 +14,6 @@ public class Hotel
     public int PaymentCurrencyId { get; set; }
     public Currency PaymentCurrency { get; set; }
     public ICollection<HotelFacility> Facilities { get; set; } //Dog-Friendly //Ski-To-Door //Metro Access //Excellent Location
-    public ICollection<HotelRoomPrice> Rooms { get; set; }
     public bool SustainableBadge { get; set; }
     public bool Promoted { get; set; }
     public decimal? OverallScore { get; set; }
@@ -26,4 +25,13 @@ public class Hotel
     public decimal? LocationRate { get; set; }
     public decimal? ValueRate { get; set; }
     public short MaxRoomsInReservation { get; set; }
+    [System.Text.Json.Serialization.JsonIgnore]
+    public ICollection<HotelRoomPrice> Rooms { get; set; }
+
+}
+
+public class HotelWithNeighbourhood
+{
+    public Hotel Hotel { get; set; }
+    public IEnumerable<Neighbourhood> Neighbourhoods { get; set; }
 }

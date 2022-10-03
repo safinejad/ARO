@@ -1,4 +1,5 @@
-﻿using Contracts.ObjectModel;
+﻿using Contracts.DataModel;
+using Contracts.ObjectModel;
 using Contracts.Requests;
 
 namespace Service;
@@ -6,5 +7,7 @@ namespace Service;
 public interface IAvailableBusinessService
 {
     //This is a testing method
-    IEnumerable<HotelAvailable> GetAvailable(HotelAvailableRequest request);
+    Task<IEnumerable<HotelAvailable>> GetAvailable(AvailableRequest request);
+    Task<HotelWithNeighbourhood> GetHotel(long hotelId);
+    Task<IEnumerable<HotelRoomPrice>> GetHotelRooms(RoomRequest request);
 }

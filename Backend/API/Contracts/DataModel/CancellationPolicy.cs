@@ -12,7 +12,6 @@ namespace Contracts.DataModel
         public TimeSpan? TimeBeforeCheckOut { get; set; }
         [Money]
         public decimal? CashCharge { get; set; }
-        [Money]
         public decimal? PercentCharge { get; set; }
     }
 

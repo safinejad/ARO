@@ -170,7 +170,7 @@ public static class DbInitializer
         var hotelFacilities = new List<HotelFacility>();
         var rnd = new Random();
         foreach (var facility in facilities.Where(x =>
-                     x.FacilityType != FacilityTypeEnum.Recommend && x.FacilityType != FacilityTypeEnum.Pricing && x.FacilityType!= FacilityTypeEnum.Floor && x.FacilityType!= FacilityTypeEnum.Dining))
+                     x.FacilityType != FacilityTypeEnum.Accommodation && x.FacilityType != FacilityTypeEnum.Recommend && x.FacilityType != FacilityTypeEnum.Outdoors && x.FacilityType != FacilityTypeEnum.Pricing && x.FacilityType!= FacilityTypeEnum.Floor && x.FacilityType!= FacilityTypeEnum.Dining))
         {
             hotelFacilities.Add(new HotelFacility()
                 { HotelId = 1, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
