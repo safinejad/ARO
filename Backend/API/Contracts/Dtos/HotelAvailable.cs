@@ -6,6 +6,6 @@ namespace Contracts.ObjectModel
     public class HotelAvailable
     {
         public Hotel Hotel { get; set; }
-        public HotelRoomPriceAvailable FirstAvailableRoom { get; set; }
+        public HotelRoomPrice FirstAvailableRoom { get; set; }
     }
 }

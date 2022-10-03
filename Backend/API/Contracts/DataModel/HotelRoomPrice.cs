@@ -2,7 +2,7 @@
 
 namespace Contracts.DataModel;
 
-public class HotelRoomPriceAvailable
+public class HotelRoomPrice
 {
     public Hotel Hotel { get; set; }
 
@@ -14,6 +14,8 @@ public class HotelRoomPriceAvailable
     public decimal? PreviousPrice { get; set; }
     [Money] 
     public decimal Price { get; set; }
+    [Money]
+    public decimal? PriceTax { get; set; }
     public ICollection<DiscountOnCount> Discounts { get; set; }
     public string RoomName { get; set; }
     public int LeftCount { get; set; }

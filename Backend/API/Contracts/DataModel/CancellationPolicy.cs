@@ -7,7 +7,7 @@ namespace Contracts.DataModel
     {
         public long Id { get; set; }
         public long RoomId { get; set; }
-        public HotelRoomPriceAvailable Room { get; set; }
+        public HotelRoomPrice Room { get; set; }
         public int? DayBeforeCheckOut { get; set; }
         public TimeSpan? TimeBeforeCheckOut { get; set; }
         [Money]

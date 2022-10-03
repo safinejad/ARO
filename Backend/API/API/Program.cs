@@ -1,5 +1,6 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
+using Service;
 
 namespace API
 {
@@ -18,8 +19,8 @@ namespace API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<BookingContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddBookingServices(builder.Configuration);
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             var app = builder.Build();
 

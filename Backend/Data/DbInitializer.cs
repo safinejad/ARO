@@ -204,23 +204,23 @@ public static class DbInitializer
 
             });
         context.HotelFacilities.AddRange(hotelFacilities);
-        var rooms = new HotelRoomPriceAvailable[]
+        var rooms = new HotelRoomPrice[]
         {
-            new HotelRoomPriceAvailable(){ Id=1, HotelId = 1, LeftCount = 4, TotalCount = 5, PreviousPrice = 6800, Price = 6604, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Grand Deluxe Room", SqMeter = 25, PayBackCredit = 500},
-            new HotelRoomPriceAvailable(){ Id=2, HotelId = 1, LeftCount = 1, TotalCount = 3, PreviousPrice = 7900, Price = 7501, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Executive Grand Deluxe Room - Lounge Access including Afternoon Tea, Evening Cocktail Hours, Soft Refreshments & Canapes", SqMeter = 35, PayBackCredit = 800},
-            new HotelRoomPriceAvailable(){ Id=3, HotelId = 1, LeftCount = 3, TotalCount = 3, PreviousPrice = 8200, Price = 8000, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Executive UAlls Grand Deluxe Room - UAlls , Soft Refreshments & Canapes", SqMeter = 35, PayBackCredit = 1060},
-            new HotelRoomPriceAvailable(){ Id=4, HotelId = 2, LeftCount = 1, TotalCount = 3, PreviousPrice = 4500, Price = 4100, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Family Room", SqMeter = 18},
-            new HotelRoomPriceAvailable(){ Id=5, HotelId = 2, LeftCount = 5, TotalCount = 6, PreviousPrice = 5200, Price = 4810, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Special Family Room", SqMeter = 28},
-            new HotelRoomPriceAvailable(){ Id=6, HotelId = 3, LeftCount = 4, TotalCount = 4, PreviousPrice = 3999, Price = 3500, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Couple with tiny one Room", SqMeter = 23},
-            new HotelRoomPriceAvailable(){ Id=7, HotelId = 3, LeftCount = 2, TotalCount = 4, PreviousPrice = 4999, Price = 4000, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "King, Queen and Princess Room", SqMeter = 36}
+            new HotelRoomPrice(){ Id=1, HotelId = 1, LeftCount = 4, TotalCount = 5, PreviousPrice = 6800, Price = 6604, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Grand Deluxe Room", SqMeter = 25, PayBackCredit = 500},
+            new HotelRoomPrice(){ Id=2, HotelId = 1, LeftCount = 1, TotalCount = 3, PreviousPrice = 7900, Price = 7501, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Executive Grand Deluxe Room - Lounge Access including Afternoon Tea, Evening Cocktail Hours, Soft Refreshments & Canapes", SqMeter = 35, PayBackCredit = 800},
+            new HotelRoomPrice(){ Id=3, HotelId = 1, LeftCount = 3, TotalCount = 3, PreviousPrice = 8200, Price = 8000, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Executive UAlls Grand Deluxe Room - UAlls , Soft Refreshments & Canapes", SqMeter = 35, PayBackCredit = 1060},
+            new HotelRoomPrice(){ Id=4, HotelId = 2, LeftCount = 1, TotalCount = 3, PreviousPrice = 4500, Price = 4100, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Family Room", SqMeter = 18},
+            new HotelRoomPrice(){ Id=5, HotelId = 2, LeftCount = 5, TotalCount = 6, PreviousPrice = 5200, Price = 4810, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Special Family Room", SqMeter = 28},
+            new HotelRoomPrice(){ Id=6, HotelId = 3, LeftCount = 4, TotalCount = 4, PreviousPrice = 3999, Price = 3500, PriceTax = 93, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "Couple with tiny one Room", SqMeter = 23},
+            new HotelRoomPrice(){ Id=7, HotelId = 3, LeftCount = 2, TotalCount = 4, PreviousPrice = 4999, Price = 4000, PriceTax = 100, CheckIn = TestCheckIn, CheckOut = TestCheckOut, RoomName  = "King, Queen and Princess Room", SqMeter = 36}
         };
 
-        SetIdentityInsert(typeof(HotelRoomPriceAvailable), context, () =>
+        SetIdentityInsert(typeof(HotelRoomPrice), context, () =>
         {
             context.HotelRoomPrices.AddRange(rooms);
 
         });
-        SetIdentityInsert(typeof(HotelRoomPriceAvailable), context, () =>
+        SetIdentityInsert(typeof(HotelRoomPrice), context, () =>
         {
             var discounts = new DiscountOnCount[]
             {

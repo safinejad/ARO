@@ -14,7 +14,7 @@ public class Hotel
     public int PaymentCurrencyId { get; set; }
     public Currency PaymentCurrency { get; set; }
     public ICollection<HotelFacility> Facilities { get; set; } //Dog-Friendly //Ski-To-Door //Metro Access //Excellent Location
-    public ICollection<HotelRoomPriceAvailable> Rooms { get; set; }
+    public ICollection<HotelRoomPrice> Rooms { get; set; }
     public bool SustainableBadge { get; set; }
     public bool Promoted { get; set; }
     public decimal? OverallScore { get; set; }

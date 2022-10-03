@@ -17,7 +17,7 @@ namespace Data
         public DbSet<Facility> Facilities { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<HotelFacility> HotelFacilities { get; set; }
-        public DbSet<HotelRoomPriceAvailable> HotelRoomPrices { get; set; }
+        public DbSet<HotelRoomPrice> HotelRoomPrices { get; set; }
         public DbSet<RoomFacility> RoomFacilities { get; set; }
         public DbSet<CancellationPolicy> CancellationPolicies { get; set; }
         public DbSet<Sleep> Sleeps { get; set; }
@@ -47,16 +47,16 @@ namespace Data
             modelBuilder.Entity<HotelFacility>().HasKey(x => x.Id);
             modelBuilder.Entity<RoomFacility>().HasKey(x => x.Id);
 
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasKey(x => x.Id);
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasOne(x => x.Hotel).WithMany(x => x.Rooms)
+            modelBuilder.Entity<HotelRoomPrice>().HasKey(x => x.Id);
+            modelBuilder.Entity<HotelRoomPrice>().HasOne(x => x.Hotel).WithMany(x => x.Rooms)
                 .HasForeignKey(x => x.HotelId);
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasMany(x => x.Discounts).WithOne(x => x.Room)
+            modelBuilder.Entity<HotelRoomPrice>().HasMany(x => x.Discounts).WithOne(x => x.Room)
                 .HasForeignKey(x => x.RoomId);
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasMany(x => x.Sleeps).WithOne(x => x.Room)
+            modelBuilder.Entity<HotelRoomPrice>().HasMany(x => x.Sleeps).WithOne(x => x.Room)
                 .HasForeignKey(x => x.RoomId);
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasMany(x => x.Facilities).WithOne(x => x.Room)
+            modelBuilder.Entity<HotelRoomPrice>().HasMany(x => x.Facilities).WithOne(x => x.Room)
                 .HasForeignKey(x => x.RoomId);
-            modelBuilder.Entity<HotelRoomPriceAvailable>().HasMany(x => x.CancellationPolicies).WithOne(x => x.Room)
+            modelBuilder.Entity<HotelRoomPrice>().HasMany(x => x.CancellationPolicies).WithOne(x => x.Room)
                 .HasForeignKey(x => x.RoomId);
 
             modelBuilder.Entity<DiscountOnCount>().HasKey(x => x.Id);
