@@ -1,0 +1,146 @@
+<div id="hotel-item">
+    <div class="row block max-height w-100 mx-0 mb-3 p-0">
+        <!-- Image block -->
+        <div class="col-12 col-md-3 col-lg-3 p-0">
+            <div class="hotel-item-image">
+                <img src="http://cdn.booking.com/hotel/pictures/main/{{hotelData.hotel.id}}"
+                     onError="this.src='assets/noimage.jpg'"
+                     alt="image"
+                     class="img-responsive"
+                >
+            </div>
+        </div>
+        <!-- Detail block -->
+        <div class="col-12 col-md-7 col-lg-7">
+            <!-- Hotel name and stars -->
+            <div class="d-flex-row">
+                <div class="d-flex justify-content-start align-items-center">
+                    <!-- Hotel name -->
+                    <div class="hotel-name fs-18 font-weight-bold mt-md-3">{{hotelData.hotel.name}}</div>
+                    <!-- Hotel stars -->
+                    <div class="hotel-stars mt-md-3">
+                        <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                            <i class="material-icons full-star fs-16"
+                               *ngIf="i <= hotelData.hotel.stars"
+                            >star
+                            </i>
+                            <i class="material-icons half-star fs-16"
+                               *ngIf="i > hotelData.hotel.stars"
+                            >star
+                            </i>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="justify-content-between display-sm">
+                    <div class="hotel-name fs-10  mt-md-3">
+                        <div class="display-sm-block pt-1">
+                            <!-- Hotel Address -->
+                            <div class="hotel-address d-none"
+                                 *ngIf="hotelData.hotel.addressBaseLine">
+                                <i class="material-icons icon fs-16">place</i>
+                                <a href="#"
+                                   target="_blank"
+                                   class="link"
+                                >
+                                    {{hotelData.hotel.addressBaseLine}}
+                                </a>
+                            </div>
+                            <!-- Trip advisor rating -->
+                            <div class="hotel-item-talink d-flex align-items-center">
+                                <a class="px-2"
+                                   target="_blank">
+                                    <span class="badge badge-warning p-1 mb-1">
+                                        {{hotelData.hotel.overallScore}}/10
+                                     </span>
+
+                                </a>
+                                <div class="Userslook">
+                                    <span *ngIf="hotelData.hotel.overallScore >= 9;">{{'Amazing'}}</span>
+                                    <span *ngIf="hotelData.hotel.overallScore == 8;">{{'Excellent'}}</span>
+                                    <span *ngIf="hotelData.hotel.overallScore == 7;">{{'Great'}}</span>
+                                    <span *ngIf="hotelData.hotel.overallScore == 6;">{{'Good'}}</span>
+                                    <span *ngIf="hotelData.hotel.overallScore < 6;">{{'Tolerable'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="assets/place-24px_1.svg">
+                        <span style="color:rgba(76, 76, 76, 1); " class="">
+                    <span>{{hotelData.hotel.name}}
+
+                    </span>
+
+                </span>
+
+
+                    </div>
+                    <div class="display-xs justify-content-end align-items-center mt-1 mb-3">
+                        <!--<div class="gray-text fs-12 mt-1 mt-md-3 d-none d-lg-block" >
+                            {{'totalprice' | translate}}
+                        </div>-->
+
+                        <div class="order-2 mx-1">
+                            <span class="blue-text fs-18">
+                                {{hotelData.firstRoomAvailable.price}}
+                            </span>
+                            <span class="blue-text fs-18"
+                                  style="color:#0241fe">$
+                            </span>
+                        </div>
+                        <div class="mx-2">
+                            <span> {{getCount(hotelData.firstRoomAvailable.sleeps) }} sleeps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-none d-lg-block"
+                 *ngIf="hotelData.hotel.highlightedFacilities.length">
+                <ul class="hotel-facilities">
+                    <li *ngFor="let ht of hotelData.hotel.highlightedFacilities">
+                        <i class="icon-facility icon icon-{{ht.facilityType}}"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-block d-lg-none hotel-item-price pt-2">
+              <button
+                (click)="showDetails(hotelData)"
+                class="btn btn-primary  mt-md-5 w-100 fs-12 reserve-btn">
+                {{'Details And Book'}}
+              </button>
+            </div>
+        </div>
+
+        <!-- Price and reserve block -->
+        <div class="d-none d-lg-block col-md-2 col-lg-2 hotel-item-price p-3">
+            <div class="d-flex justify-content-end align-items-top pt-1">
+
+
+                <!-- Trip advisor rating -->
+                <div  class="hotel-item-talink d-flex">
+                    <div class="Userslook px-2">
+                        <span *ngIf="hotelData.hotel.overallScore >= 9;">{{'Amazing'}}</span>
+                        <span *ngIf="hotelData.hotel.overallScore== 8;">{{'Excellent'}}</span>
+                        <span *ngIf="hotelData.hotel.overallScore == 7;">{{'Great'}}</span>
+                        <span *ngIf="hotelData.hotel.overallScore == 6;">{{'Good'}}</span>
+                        <span *ngIf="hotelData.hotel.overallScore < 6;">{{'Tolerable'}}</span>
+                        <br>
+                        <span>{{'Users point of views: ' + hotelData.hotel.numberOfReviews }}</span>
+                    </div>
+                </div>
+            </div>
+          <div class="d-block d-lg-none hotel-item-price pt-2">
+            <button
+              (click)="showDetails(hotelData)"
+              class="btn btn-primary  mt-md-5 w-100 fs-12 reserve-btn">
+              {{'Details And Book'}}
+            </button>
+          </div>
+
+        </div>
+    </div>
+</div>
+<!-- /#hotel-item -->
+
+

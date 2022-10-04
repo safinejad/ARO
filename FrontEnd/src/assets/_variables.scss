@@ -1,0 +1,202 @@
+$light: whitesmoke;
+$dark: #022D41;
+$main1: #32abda;
+$main2: #fed4a4;
+$green: #9acf67;
+$red: #de1e45;
+$gray: #f5f6f8;
+$dark: #000;
+$yellow: yellow;
+$blue: #879cb1;
+$blue-dark: #0e42b8;
+$blue-mid: #138ed7 !default;
+$blue-light: #99c0dd;
+$red: #de1e45;
+$purple: #ac86b7;
+$light-green: #9acf67;
+$gray-t1: #f8f8f8;
+$gold: #e1bb3e;
+
+//MIXIN
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
+
+.btn-zero {
+    min-width: 60px;
+    height: 40px;
+    padding: 5px 10px;
+    border-bottom: 2px rgba($dark, 0.5) solid;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 1;
+        color: white;
+        background: lightgray;
+
+        &:hover {
+            background: lightgray;
+        }
+    }
+}
+
+.btn-yellow {
+    background-color: $yellow;
+    color: black;
+
+    &:hover {
+        background-color: darken($yellow, 2%);
+    }
+}
+
+.btn-1 {
+    background-color: $main1;
+    color: white;
+
+    &:hover {
+        background-color: darken($main1, 2%);
+    }
+}
+
+.btn-2 {
+    background-color: $main1;
+    color: black;
+
+    &:hover {
+        background-color: darken($main1, 2%);
+    }
+}
+
+.btn-green {
+    background-color: $green;
+    color: black;
+
+    &:hover {
+        background-color: darken($green, 2%);
+    }
+}
+
+.btn-white {
+    background-color: white;
+    color: black;
+    border: 1px rgba($dark, .15) solid;
+    border-bottom: 2px rgba($dark, 0.5) solid;
+
+    &:hover {
+        background-color: darken(white, 2%);
+    }
+}
+
+.btn-purple {
+    background-color: $purple;
+    color: black;
+
+    &:hover {
+        background-color: darken($purple, 2%);
+    }
+}
+.box-shadow-1 {
+    box-shadow: inset 0 11px 8px -10px $light,
+    inset 0 -11px 8px -10px $light;
+    border: 1px $light solid;
+}
+
+.btn-red {
+    background-color: $red;
+    color: white;
+
+    &:hover {
+        background-color: darken($red, 2%);
+    }
+}
+
+.btn-round {
+    border-radius: 20px;
+    line-height: 1.9;
+}
+
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "general-variables";
+
+$accent-navigation-1: #321648;
+$accent-navigation-2: #4e3661;
+$accent-navigation-footer: #000;
+//----------
+$accent-action-1: #555;
+
+/*--------------------------------------------------*/
+/* @media screen width                              */
+/*--------------------------------------------------*/
+/* Small devices (tablets, 768px and up) */
+$screen-sm-min: 780px;
+
+/* Medium devices (desktops, 992px and up) */
+$screen-md-min: 992px;
+
+/* Large devices (large desktops, 1200px and up) */
+$screen-lg-min: 1200px;
+
+
+/*--------------------------------------------------*/
+/* Color                                            */
+/*--------------------------------------------------*/
+$bg-color-light: rgba(0,0,0,.03);
+$bg-color-light-hover: #d5d5d5;
+$border-color: rgba(0,0,0,.12);
+$color-light: rgba(0,0,0,.54);
+$color-red: #f44336;
+//------------
+$theme-color-pink: #321648;
+//-----------
+$color-danger: #f44336;
+$color-primary: #4285f4;
+$color-warning: #f2a504;
+
+
+/*--------------------------------------------------*/
+/* Defaults                                         */
+/*--------------------------------------------------*/
+$default-border: 1px solid $border-color;
+$card-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+
+
+
+
+
+
+/*--------------------------------------------------*/
+/* Shirin's template variables                      */
+/*--------------------------------------------------*/
+// TODO: modified by nSafari, must be checked
+$main1: #0f44b8 !default;
+$main2: #1ab04d !default;
+$blue-light: #00a8ff !default;
+$blue-mid: #138ed7 !default;
+$blue-dark: #0e42b8;
+$gray: #a9abb0 !default;
+$light: #ececec !default;
+$red: #f45a66 !default;
+$green: #40c140 !default;
+$dark: black;
+$blue: blue;
+$gold: #e1bb3e;
+$gray-t1: #f8f8f8;
+$light-green: #9acf67;
+$purple: #ac86b7;
+
+///////////////////////// New Template - Altrabo-Next
+
+$color: #fed4a4;

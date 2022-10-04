@@ -10,4 +10,5 @@ public interface IAvailableBusinessService
     Task<IEnumerable<HotelAvailable>> GetAvailable(AvailableRequest request);
     Task<HotelWithNeighbourhood> GetHotel(long hotelId);
     Task<IEnumerable<HotelRoomPrice>> GetHotelRooms(RoomRequest request);
+    Task<IEnumerable<Currency>> GetCurrencies();
 }

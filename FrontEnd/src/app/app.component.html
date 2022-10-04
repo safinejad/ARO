@@ -1,0 +1,41 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img
+    width="40"
+    alt="Logo"
+    src="assets/logo.jpg"
+  />
+  <span>Aro's Booking</span>
+    <div class="spacer"></div>
+</div>
+
+<div class="content" role="main">
+
+  <!-- Highlight Card -->
+  <div class="card highlight-card card-small" style="width: 100%">
+
+    <img src="assets/hotel.png" height="35" width="35" />
+    <span>Assuming you had searched for Hotels...</span>
+  </div>
+
+
+  <h2>Results</h2>
+  <p>We've found these Results:</p>
+
+
+
+
+
+  <div style="min-height: 800px;"
+       *ngIf="availables && availables.length">
+    <div class="row">
+      <!-- Available column -->
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <!-- Sort block -->
+            <app-hotel-item *ngFor="let item of availables"
+                            [hotelData]="item"
+                            ></app-hotel-item>
+      </div>
+    </div>
+  </div>
+</div>

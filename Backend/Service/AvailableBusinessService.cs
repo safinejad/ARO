@@ -127,6 +127,12 @@ namespace Service
 
             return hotelRoomPrices.OrderBy(x => x.Price);
         }
+
+        public async Task<IEnumerable<Currency>> GetCurrencies()
+        {
+            return _dbContext.Currencies.Where(x => !string.IsNullOrWhiteSpace(x.Name));
+        }
+
         public static decimal GetLatLonDif(double distance)
         {
             var latDif = (decimal)(0.0001D * distance);

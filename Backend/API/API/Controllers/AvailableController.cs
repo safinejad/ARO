@@ -23,7 +23,13 @@ namespace API.Controllers
 
         private readonly IAvailableBusinessService _availableService;
         private readonly IMapper _mapper;
-
+        [HttpGet("Currencies")]
+        public async Task<ActionResult<IEnumerable<CurrencyDto>>> GetSupportedCurrencies()
+        {
+            var currencies = _availableService.GetCurrencies();
+            var converted = _mapper.Map<IEnumerable<CurrencyDto>>(currencies);
+            return Ok(converted);
+        }
 
         [HttpGet("{geographicBoundary}/{checkIn}/{checkOut}")] //TODO: better for seo : Change geoId => geoCode
         public async Task<ActionResult<IEnumerable<AvailableDto>>> Available([FromRoute] long geographicBoundary,
