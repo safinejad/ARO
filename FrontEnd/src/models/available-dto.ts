@@ -18,6 +18,10 @@ export interface HotelAvailableDto {
   numberOfReviews: number,
   comfortRate: number
 }
+export interface  CurrencyDto {
+  name: string,
+  sign: string
+}
 export interface RoomAvailableDto {
  price: number,
  priceTax:number,

@@ -62,6 +62,7 @@ public class NeighbourhoodDto
 
 public class RoomDto
 {
+    [Money]
     public decimal? PreviousPrice { get; set; }
     [Money]
     public decimal Price { get; set; }

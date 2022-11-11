@@ -7,6 +7,11 @@
   />
   <span>Aro's Booking</span>
     <div class="spacer"></div>
+  <span>
+    <select (change)="changeCurrency($event.target)">
+      <option *ngFor="let item of currencies" [selected]="item.name==currency.name" [value]="item.name">{{item.name}} - {{item.sign}}</option>
+    </select>
+  </span>
 </div>
 
 <div class="content" role="main">
@@ -26,14 +31,15 @@
 
 
 
-  <div style="min-height: 800px;"
+  <div style="min-height: 800px;" class="col-xs-12 col-lg-12"
        *ngIf="availables && availables.length">
     <div class="row">
       <!-- Available column -->
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+      <div class="col-xs-12 col-lg-12" *ngIf="currency">
         <!-- Sort block -->
             <app-hotel-item *ngFor="let item of availables"
                             [hotelData]="item"
+                            [currency]="currency"
                             ></app-hotel-item>
       </div>
     </div>

@@ -16,26 +16,17 @@
             <div class="d-flex-row">
                 <div class="d-flex justify-content-start align-items-center">
                     <!-- Hotel name -->
+                  <a href="/Hotel?{{hotelData.hotel.id}}" target="_blank">
                     <div class="hotel-name fs-18 font-weight-bold mt-md-3">{{hotelData.hotel.name}}</div>
-                    <!-- Hotel stars -->
-                    <div class="hotel-stars mt-md-3">
-                        <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
-                            <i class="material-icons full-star fs-16"
-                               *ngIf="i <= hotelData.hotel.stars"
-                            >star
-                            </i>
-                            <i class="material-icons half-star fs-16"
-                               *ngIf="i > hotelData.hotel.stars"
-                            >star
-                            </i>
-                        </ng-container>
-                    </div>
+                  </a>
+
+
                 </div>
                 <div class="justify-content-between display-sm">
                     <div class="hotel-name fs-10  mt-md-3">
                         <div class="display-sm-block pt-1">
                             <!-- Hotel Address -->
-                            <div class="hotel-address d-none"
+                            <div class="hotel-address"
                                  *ngIf="hotelData.hotel.addressBaseLine">
                                 <i class="material-icons icon fs-16">place</i>
                                 <a href="#"
@@ -54,18 +45,12 @@
                                      </span>
 
                                 </a>
-                                <div class="Userslook">
-                                    <span *ngIf="hotelData.hotel.overallScore >= 9;">{{'Amazing'}}</span>
-                                    <span *ngIf="hotelData.hotel.overallScore == 8;">{{'Excellent'}}</span>
-                                    <span *ngIf="hotelData.hotel.overallScore == 7;">{{'Great'}}</span>
-                                    <span *ngIf="hotelData.hotel.overallScore == 6;">{{'Good'}}</span>
-                                    <span *ngIf="hotelData.hotel.overallScore < 6;">{{'Tolerable'}}</span>
-                                </div>
                             </div>
                         </div>
                         <img src="assets/place-24px_1.svg">
-                        <span style="color:rgba(76, 76, 76, 1); " class="">
-                    <span>{{hotelData.hotel.name}}
+                        <span style="color:rgba(76, 76, 76, 1); " class="">{{hotelData.hotel.addressBaseLine}}
+
+                    <span>
 
                     </span>
 
@@ -83,25 +68,32 @@
                                 {{hotelData.firstRoomAvailable.price}}
                             </span>
                             <span class="blue-text fs-18"
-                                  style="color:#0241fe">$
+                                  style="color:#0241fe">{{currency.sign}}
                             </span>
                         </div>
                         <div class="mx-2">
-                            <span> {{getCount(hotelData.firstRoomAvailable.sleeps) }} sleeps</span>
+                            <span> {{getCount(hotelData.firstRoomAvailable.sleeps) }} sleeps ({{getTypes(hotelData.firstRoomAvailable.sleeps)}}) </span>
                         </div>
                     </div>
                 </div>
             </div>
+          <div class="d-none d-lg-block"
+               *ngIf="hotelData.hotel.highlightedFacilities.length">
+            <ul class="hotel-facilities place">
 
-
-            <div class="d-none d-lg-block"
-                 *ngIf="hotelData.hotel.highlightedFacilities.length">
-                <ul class="hotel-facilities">
-                    <li *ngFor="let ht of hotelData.hotel.highlightedFacilities">
-                        <i class="icon-facility icon icon-{{ht.facilityType}}"></i>
+              <li *ngFor="let ht of getFacilities(hotelData.hotel.highlightedFacilities, [4])">
+                <!--                        <i class="icon-facility icon icon-{{ht.facilityType}}"></i>-->
+                <span >{{ht.name}}</span>
+              </li>
+            </ul>
+                <ul class="hotel-facilities facil">
+                    <li *ngFor="let ht of getFacilities(hotelData.hotel.highlightedFacilities, [15,9])">
+<!--                        <i class="icon-facility icon icon-{{ht.facilityType}}"></i>-->
+                      <span >{{ht.name}}</span>
                     </li>
                 </ul>
             </div>
+
 
             <div class="d-block d-lg-none hotel-item-price pt-2">
               <button
@@ -120,6 +112,19 @@
                 <!-- Trip advisor rating -->
                 <div  class="hotel-item-talink d-flex">
                     <div class="Userslook px-2">
+                      <!-- Hotel stars -->
+                      <div class="hotel-stars mt-md-3">
+                        <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                          <i class="material-icons full-star fs-16"
+                             *ngIf="i <= hotelData.hotel.stars"
+                          >star
+                          </i>
+                          <i class="material-icons half-star fs-16"
+                             *ngIf="i > hotelData.hotel.stars"
+                          >star
+                          </i>
+                        </ng-container>
+                      </div>
                         <span *ngIf="hotelData.hotel.overallScore >= 9;">{{'Amazing'}}</span>
                         <span *ngIf="hotelData.hotel.overallScore== 8;">{{'Excellent'}}</span>
                         <span *ngIf="hotelData.hotel.overallScore == 7;">{{'Great'}}</span>

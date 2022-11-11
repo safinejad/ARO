@@ -3,21 +3,23 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import {BookingService} from "./booking.service";
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class ReqInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private bookingService: BookingService) {
 
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let headers: HttpHeaders = request.headers;//.set('Authorization', `Bearer ${this.authService.accessToken}`);
-
+    //debugger;
     if (!request.headers.has('Content-Type')) {
       headers = headers.set('Content-Type', 'application/json');
     }
+    headers = headers.set('Currency', this.bookingService.userCurrency );
 
     if (!request.headers.has('Accept')) {
       headers = headers.set('Accept', 'application/json');

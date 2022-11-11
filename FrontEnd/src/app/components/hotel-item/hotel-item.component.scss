@@ -123,19 +123,20 @@ $color-10: #ffc800;
 
     ul.hotel-facilities {
         width: 100%;
-        height: 65px;
-        display: inline-block;
-        margin-top: 10px;
-        overflow: hidden;
-
         li {
             float: left;
-            margin-right: 15px;
-            font-size: 1.4em;
+            margin-right: 16px;
+            font-size: 0.7em;
             height: 30px;
-            margin-bottom: 5px;
+            //margin-bottom: 5px;
         }
     }
+  .hotel-facilities.place *{
+    color:orange !important;
+  }
+  .hotel-facilities.facil *{
+    color:blue !important;
+  }
     .max-height{
         max-height: 175px;
         overflow: hidden;

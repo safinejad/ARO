@@ -1,3 +1,4 @@
+using System.Text.Json;
 using API.Dtos;
 using AutoMapper;
 using Contracts.Requests;
@@ -15,18 +16,21 @@ namespace API.Controllers
             return (decimal) (Math.Acos(Math.Sin((double)lat1) * Math.Sin((double)lat2) +
                              Math.Cos((double)lat1) * Math.Cos((double)lat2) * Math.Cos((double)lon2 - (double)lon1)) * (double)63.71);
         }
-        public AvailableController(IAvailableBusinessService availableBusinessService, IMapper mapper)
+        public AvailableController(IAvailableBusinessService availableBusinessService, IMapper mapper, IHttpContextAccessor accessor)
         {
             _availableService = availableBusinessService;
+            _accessor = accessor;
             _mapper = mapper;
         }
 
         private readonly IAvailableBusinessService _availableService;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _accessor;
+
         [HttpGet("Currencies")]
         public async Task<ActionResult<IEnumerable<CurrencyDto>>> GetSupportedCurrencies()
         {
-            var currencies = _availableService.GetCurrencies();
+            var currencies = await _availableService.GetCurrencies();
             var converted = _mapper.Map<IEnumerable<CurrencyDto>>(currencies);
             return Ok(converted);
         }
@@ -51,6 +55,8 @@ namespace API.Controllers
             var converted = _mapper.Map<IEnumerable<AvailableDto>>(availables);
             return Ok(converted);
         }
+
+
         [HttpGet("{hotelId}")] //TODO: better for seo : Change geoId => geoCode
         public async Task<ActionResult<HotelWithNeighbourhoodDto>> Hotel([FromRoute] long hotelId)
         {
@@ -80,8 +86,10 @@ namespace API.Controllers
 
             return Ok(converted);
         }
+
+
         [HttpGet("{hotelId}/Rooms/{checkIn}/{checkOut}")] //TODO: better for seo : Change geoId => geoCode
-        public async Task<ActionResult<IEnumerable<AvailableDto>>> HotelRooms([FromRoute] long hotelId, [FromRoute] DateTime checkIn, [FromRoute] DateTime checkOut,
+        public async Task<ActionResult<IEnumerable<RoomDto>>> HotelRooms([FromRoute] long hotelId, [FromRoute] DateTime checkIn, [FromRoute] DateTime checkOut,
             [FromQuery] int adultCount = 3, [FromRoute] int roomCount = 1,
             [FromQuery] int[] childAges = null)
         {

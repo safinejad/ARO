@@ -22,8 +22,8 @@ public static class DbInitializer
             var currencies = new Currency[]
             {
                 new Currency() { ExchangeRateFromUSDollar = 1, Name = "USD", Sign = "$", Id = 1 },
-                new Currency() { ExchangeRateFromUSDollar = 1, Name = "EUR", Sign = "€", Id = 2 },
-                new Currency() { ExchangeRateFromUSDollar = 1, Name = "GBP", Sign = "£", Id = 3 }
+                new Currency() { ExchangeRateFromUSDollar = 0.8M, Name = "EUR", Sign = "€", Id = 2 },
+                new Currency() { ExchangeRateFromUSDollar = 1.5M, Name = "GBP", Sign = "£", Id = 3 }
             };
             context.Currencies.AddRange(currencies);
         });
@@ -154,7 +154,6 @@ public static class DbInitializer
             };
         SetIdentityInsert(typeof(Facility), context, () =>
         {
-            
             context.Facilities.AddRange(facilities);
         });
         SetIdentityInsert(typeof(Hotel), context, () =>
@@ -170,39 +169,53 @@ public static class DbInitializer
         var hotelFacilities = new List<HotelFacility>();
         var rnd = new Random();
         foreach (var facility in facilities.Where(x =>
-                     x.FacilityType != FacilityTypeEnum.Accommodation && x.FacilityType != FacilityTypeEnum.Recommend && x.FacilityType != FacilityTypeEnum.Outdoors && x.FacilityType != FacilityTypeEnum.Pricing && x.FacilityType!= FacilityTypeEnum.Floor && x.FacilityType!= FacilityTypeEnum.Dining))
+                     x.FacilityType != FacilityTypeEnum.Accommodation && x.FacilityType != FacilityTypeEnum.Recommend &&
+                     x.FacilityType != FacilityTypeEnum.Outdoors && x.FacilityType != FacilityTypeEnum.Pricing &&
+                     x.FacilityType != FacilityTypeEnum.Floor && x.FacilityType != FacilityTypeEnum.Dining))
         {
-            hotelFacilities.Add(new HotelFacility()
-                { HotelId = 1, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
-            if (rnd.Next(0, 10) < 8)
+            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 1))
             {
                 hotelFacilities.Add(new HotelFacility()
-                    { HotelId = 2, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
+                    { HotelId = 1, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
             }
 
-            if (rnd.Next(0, 10) < 4)
+            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 2))
             {
-                hotelFacilities.Add(new HotelFacility()
-                    { HotelId = 3, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
+                if (rnd.Next(0, 10) < 8)
+                {
+                    hotelFacilities.Add(new HotelFacility()
+                        { HotelId = 2, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
+                }
+            }
+
+            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 3))
+            {
+                if (rnd.Next(0, 10) < 4)
+                {
+                    hotelFacilities.Add(new HotelFacility()
+                        { HotelId = 3, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
+                }
             }
         }
 
-        hotelFacilities.AddRange(
-            new HotelFacility[]
-            {
-                new HotelFacility() { HotelId = 1, FacilityId = 87, SearchMatchAdult = 2, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 1, FacilityId = 88, SearchMatchAdult = 2, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 1, FacilityId = 93, SearchMatchAdult = 1, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 1, FacilityId = 94, SearchMatchAdult = 1, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 3, FacilityId = 93, SearchMatchAdult = 1, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 3, FacilityId = 94, SearchMatchAdult = 1, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 2, FacilityId = 89, SearchMatchAdult = 1, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 2, FacilityId = 89, SearchMatchAdult = 2, SearchMatchChild = 0 },
-                new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 1 },
-                new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 2 },
-                new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 3 }
+        var defaults = new HotelFacility[]
+        {
+            new HotelFacility() { HotelId = 1, FacilityId = 87, SearchMatchAdult = 2, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 1, FacilityId = 88, SearchMatchAdult = 2, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 1, FacilityId = 93, SearchMatchAdult = 1, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 1, FacilityId = 94, SearchMatchAdult = 1, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 3, FacilityId = 93, SearchMatchAdult = 1, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 3, FacilityId = 94, SearchMatchAdult = 1, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 2, FacilityId = 89, SearchMatchAdult = 1, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 2, FacilityId = 89, SearchMatchAdult = 2, SearchMatchChild = 0 },
+            new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 1 },
+            new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 2 },
+            new HotelFacility() { HotelId = 2, FacilityId = 90, SearchMatchAdult = 2, SearchMatchChild = 3 }
 
-            });
+        };
+        hotelFacilities.AddRange(defaults.Where(x =>
+            !hotelFacilities.Any(y => y.FacilityId == x.FacilityId && y.HotelId == x.HotelId)));
+
         context.HotelFacilities.AddRange(hotelFacilities);
         var rooms = new HotelRoomPrice[]
         {
@@ -299,16 +312,13 @@ public static class DbInitializer
             foreach (var room in rooms)
             {
 
-                if (rnd.Next(0, 10) < 8)
+                if (!roomFacilities.Any(x => x.RoomId == room.Id && facility.Id == x.FacilityId))
                 {
-                    roomFacilities.Add(new RoomFacility()
-                        { RoomId = room.Id, FacilityId = facility.Id });
-                }
-
-                if (rnd.Next(0, 10) < 4)
-                {
-                    roomFacilities.Add(new RoomFacility()
-                        { RoomId = room.Id, FacilityId = facility.Id });
+                    if (rnd.Next(0, 10) < 4)
+                    {
+                        roomFacilities.Add(new RoomFacility()
+                            { RoomId = room.Id, FacilityId = facility.Id });
+                    }
                 }
             }
         }

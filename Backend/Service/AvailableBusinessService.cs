@@ -124,7 +124,6 @@ namespace Service
                 .Include(x => x.Facilities).ThenInclude(x => x.Facility);
             hotelRoomPrices = hotelRoomPrices.Include(x => x.CancellationPolicies);
             //No Check for CheckIn/CheckOutDate because this is a Test!
-
             return hotelRoomPrices.OrderBy(x => x.Price);
         }
 

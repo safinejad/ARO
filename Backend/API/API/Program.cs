@@ -22,8 +22,8 @@ namespace API
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
-
-            builder.Services.AddControllers();
+            var httpContextAccessor = new HttpContextAccessor();
+            builder.Services.AddSingleton<IHttpContextAccessor>(httpContextAccessor);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             
@@ -31,6 +31,14 @@ namespace API
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddBookingServices(builder.Configuration);
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddControllers()
+            .AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Insert(0,
+                    new MoneyConverter(httpContextAccessor));
+                opt.JsonSerializerOptions.Converters.Insert(0,
+                    new MoneyConverter1(httpContextAccessor));
+            });
             var app = builder.Build();
             app.UseCors();
             app.UseOptions();
@@ -67,6 +75,7 @@ namespace API
             }
         }
     }
+
     public class OptionsMiddleware
     {
         private readonly RequestDelegate _next;
