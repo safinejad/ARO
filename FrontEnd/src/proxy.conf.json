@@ -1,9 +1,9 @@
-{
-  "/*": {
-    "target": "...",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": { "^/": "" }
-  }
-}
+//{
+//  "**": {
+//    "target": "...",
+//    "secure": false,
+//    "logLevel": "debug",
+//    "changeOrigin": true,
+//    "pathRewrite": { "^/": "" }
+//  }
+//}

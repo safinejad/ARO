@@ -5,7 +5,7 @@ import { getOrCreateValue } from '../helpers/data.store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LinkGenerator } from './link-generator.service';
 import { filter } from 'rxjs/operators';
-import {AvailableDto, CurrencyDto} from "../models/available-dto";
+import {AvailableDto, CurrencyDto, HotelWithNeighbourhoodDto} from "../models/available-dto";
 import { CookieService } from 'ngx-cookie-service';
 @Injectable({ providedIn: 'root' })
 export class BookingService extends ServiceBase {
@@ -35,16 +35,28 @@ export class BookingService extends ServiceBase {
 
 
 
-public getAvailable(clientAccountNumber?: string): Observable<AvailableDto[]> {
+public getAvailable(): Observable<AvailableDto[]> { //Parameters are for demo
   let geographicBoundary = 0;
   let checkIn = '2023-01-01';
   let checkOut = '2023-01-10';
   let roomCount = 1;
   let adultCount = 3;
-  let head : any = new HttpHeaders()
-    .set('Currency', this.userCurrency);
     return this.httpClient
       .get<AvailableDto[]>(this.linkGenerator.url(`/Available/${geographicBoundary}/${checkIn}/${checkOut}?roomCount=${roomCount}&adultCount=${adultCount}`));
+
+  }
+  public getHotelRooms(id: number): Observable<AvailableDto[]> { //Parameters are for demo
+    let checkIn = '2023-01-01';
+    let checkOut = '2023-01-10';
+    let roomCount = 1;
+    let adultCount = 3;
+    return this.httpClient
+      .get<AvailableDto[]>(this.linkGenerator.url(`/Available/${id}/Rooms/${checkIn}/${checkOut}?roomCount=${roomCount}&adultCount=${adultCount}`));
+
+  }
+  public getHotel(id: number): Observable<HotelWithNeighbourhoodDto> {
+    return this.httpClient
+      .get<HotelWithNeighbourhoodDto>(this.linkGenerator.url(`/Available/${id}`));
 
   }
 

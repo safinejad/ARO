@@ -6,20 +6,31 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 import {applicationInitializerFactory} from "./applicationInitializerFactory";
 import {AppConfigService} from "../services/app-config-service";
 import {ReqInterceptor} from "../services/req-interceptor.service";
-import {ActivatedRoute, RouterModule} from "@angular/router";
+import {ActivatedRoute, RouterModule, Routes} from "@angular/router";
 import {HotelItemComponent} from "./components/hotel-item/hotel-item.component";
+import {HotelDetailComponent} from "./components/hotel-detail/hotel-detail.component";
+import {AvailableComponent} from "./components/available/available.component";
+export class AppRoutingModule { }
 
 @NgModule({
   declarations: [
     AppComponent,
-    HotelItemComponent
+    HotelItemComponent,
+    AvailableComponent,
+    HotelDetailComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    RouterModule
-
+    RouterModule.forRoot([
+      {path: '', redirectTo:'available', pathMatch: 'full'},
+      { path: 'available', component: AvailableComponent},
+      { path: 'hotel', component: HotelDetailComponent, children: [
+          { path: '**', component: HotelDetailComponent}
+        ] }
+    ]),
+    HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: applicationInitializerFactory,

@@ -3,31 +3,40 @@ import {
   AvailableDto,
   CurrencyDto,
   FacilityTypeEnum,
-  FreeFacilityDto,
+  FreeFacilityDto, HotelWithNeighbourhoodDto,
   SleepDto,
   SleepTypeEnum
 } from "../../../models/available-dto";
+import {BookingService} from "../../../services/booking.service";
+import {Router} from "@angular/router";
 
 
 declare function escape(s: string): string;
 @Component({
-  selector: "app-hotel-item",
-  templateUrl: "./hotel-item.component.html",
-  styleUrls: ["./hotel-item.component.scss"]
+  selector: "app-hotel-detail",
+  templateUrl: "./hotel-detail.component.html",
+  styleUrls: ["./hotel-detail.component.scss"]
 })
-export class HotelItemComponent implements OnInit {
-    @Input() hotelData: AvailableDto;
-    @Input() currency: CurrencyDto;
+export class HotelDetailComponent implements OnInit {
+  public hotelWithNeighbour: HotelWithNeighbourhoodDto;
+  private rooms: AvailableDto[];
 
-    constructor() {
+
+    constructor(private bookingService: BookingService, private router: Router ) {
     }
 
     ngOnInit() {
+      let url = (this.router.url as any).trimEnd('/');
+      let idPart=url.substr(url.lastIndexOf('/')+1);
+      let id = 0;
+      if (!isNaN(+idPart)  ){
+        id = +idPart
+      }else{
+        return;
+      }
 
-    }
-    showDetails(hotel: AvailableDto): void {
-
-            window.open('/hotel/'+hotel.hotel.id);
+      this.bookingService.getHotel(id).subscribe(x=> this.hotelWithNeighbour = x);
+      this.bookingService.getHotelRooms(id).subscribe(x=> this.rooms = x);
     }
 
   getCount(sleeps: SleepDto[]) {

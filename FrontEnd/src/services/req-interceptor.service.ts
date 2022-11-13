@@ -15,7 +15,6 @@ export class ReqInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let headers: HttpHeaders = request.headers;//.set('Authorization', `Bearer ${this.authService.accessToken}`);
-    //debugger;
     if (!request.headers.has('Content-Type')) {
       headers = headers.set('Content-Type', 'application/json');
     }

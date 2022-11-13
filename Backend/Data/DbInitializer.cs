@@ -149,7 +149,7 @@ public static class DbInitializer
             new Facility(){Id=  91, FacilityType = FacilityTypeEnum.Recommend, Highlighted = true, Name = "Great for two travelers with two kids"},
             new Facility(){Id=  92, FacilityType = FacilityTypeEnum.Recommend, Highlighted = true, Name = "Great for two travelers with three kids"},
             new Facility(){Id=  93, FacilityType = FacilityTypeEnum.Recommend, Highlighted = true, Name = "Great for traveling solo"},
-            new Facility(){Id=  94, FacilityType = FacilityTypeEnum.Recommend, Highlighted = true, Name = "Great for business"},
+            new Facility(){Id=  94, FacilityType = FacilityTypeEnum.Recommend, Highlighted = true, Name = "Great for business"}
 
             };
         SetIdentityInsert(typeof(Facility), context, () =>
@@ -173,13 +173,13 @@ public static class DbInitializer
                      x.FacilityType != FacilityTypeEnum.Outdoors && x.FacilityType != FacilityTypeEnum.Pricing &&
                      x.FacilityType != FacilityTypeEnum.Floor && x.FacilityType != FacilityTypeEnum.Dining))
         {
-            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 1))
+            if (!hotelFacilities.Any(x => x.FacilityId == facility.Id && x.HotelId == 1))
             {
                 hotelFacilities.Add(new HotelFacility()
                     { HotelId = 1, FacilityId = facility.Id, ExtraChargeRequired = rnd.Next(0, 10) % 4 == 0 });
             }
 
-            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 2))
+            if (!hotelFacilities.Any(x => x.FacilityId == facility.Id && x.HotelId == 2))
             {
                 if (rnd.Next(0, 10) < 8)
                 {
@@ -188,7 +188,7 @@ public static class DbInitializer
                 }
             }
 
-            if (hotelFacilities.All(x => x.FacilityId != facility.Id && x.HotelId == 3))
+            if (!hotelFacilities.Any(x => x.FacilityId == facility.Id && x.HotelId == 3))
             {
                 if (rnd.Next(0, 10) < 4)
                 {
@@ -200,6 +200,7 @@ public static class DbInitializer
 
         var defaults = new HotelFacility[]
         {
+            new HotelFacility() { HotelId = 3, FacilityId = 73, SearchMatchAdult = null, SearchMatchChild = null },
             new HotelFacility() { HotelId = 1, FacilityId = 87, SearchMatchAdult = 2, SearchMatchChild = 0 },
             new HotelFacility() { HotelId = 1, FacilityId = 88, SearchMatchAdult = 2, SearchMatchChild = 0 },
             new HotelFacility() { HotelId = 1, FacilityId = 93, SearchMatchAdult = 1, SearchMatchChild = 0 },
