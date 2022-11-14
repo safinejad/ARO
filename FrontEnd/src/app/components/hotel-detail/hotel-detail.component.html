@@ -42,11 +42,11 @@
                     <span class="pl-2">
                                             {{hotelDetails.addressBaseLine}}
                                          </span>
-                    <!-- <a href="https://maps.google.com/?ll={{hotelDetails.lat}},{{hotelDetails.lon}}"
+                     <a href="https://maps.google.com/?ll={{hotelDetails.latitude}},{{hotelDetails.longitude}}"
                         target="_blank"
-                        class="link">
-                         {{'viewOnMap'|translate}}
-                     </a>-->
+                        class="link ml-10">
+                       &nbsp;&nbsp;{{'View On Map'}}
+                     </a>
                   </div>
                   <!-- Trip advisor rating -->
                   <div class="hotel-item-talink d-none d-md-block">
@@ -197,7 +197,7 @@
 
                 <div style="float: right">
                   <span *ngIf="item.previousPrice"
-                    class="old-price" >{{item.previousPrice}}</span>&nbsp;
+                    class="font-weight-bold old-price" >{{item.previousPrice}}</span>&nbsp;
 
                   <span
                   class="font-weight-bold" >{{item.price}}</span>&nbsp;
