@@ -10,6 +10,9 @@ import {ActivatedRoute, RouterModule, Routes} from "@angular/router";
 import {HotelItemComponent} from "./components/hotel-item/hotel-item.component";
 import {HotelDetailComponent} from "./components/hotel-detail/hotel-detail.component";
 import {AvailableComponent} from "./components/available/available.component";
+import {MapComponent} from "./components/map/map.component";
+import {MapMarkerDirective} from "./components/map/map-marker/map-marker.directive";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 export class AppRoutingModule { }
 
 @NgModule({
@@ -17,7 +20,9 @@ export class AppRoutingModule { }
     AppComponent,
     HotelItemComponent,
     AvailableComponent,
-    HotelDetailComponent
+    HotelDetailComponent,
+    MapComponent,
+    MapMarkerDirective
   ],
   imports: [
     BrowserModule,
@@ -28,9 +33,11 @@ export class AppRoutingModule { }
           { path: '**', component: HotelDetailComponent}
         ] }
     ]),
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule
   ],
-  exports: [RouterModule],
+  exports: [RouterModule,    MapComponent,
+    MapMarkerDirective],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: applicationInitializerFactory,

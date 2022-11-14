@@ -19,13 +19,14 @@ export interface NeighbourhoodDto{
 export interface HotelDto {
   id: number,
   name: string,
+  addressBaseLine: string,
   stars: number,
   latitude: number,
   longitude: number,
   description: string,
   district: DistrictDto,
   paymentCurrency: CurrencyDto,
-  facilities: HotelFacilityDto,
+  facilities: HotelFacilityDto[],
   sustainableBadge: boolean,
   promoted: boolean,
   overallScore: number,
@@ -38,6 +39,41 @@ export interface HotelDto {
   valueRate: number,
   maxRoomsInReservation: number,
 }
+export interface RoomDto {
+  previousPrice: number,
+  price: number,
+  priceTax: number,
+  discounts: DiscountOnCountDto[],
+  roomName: string,
+  leftCount: number,
+  totalCount: number,
+  sqMeter: number,
+  payBackCredit: number,
+  sleeps: SleepDto[],
+  facilities: RoomFacilityDto[],
+  cancellationPolicies: CancellationPolicyDto[]
+}
+
+export interface CancellationPolicyDto {
+  dayBeforeCheckOut: number,
+  timeBeforeCheckOut: string,
+  cashCharge: number,
+  percentCharge: number
+}
+export interface RoomFacilityDto {
+  id: number,
+  name: string,
+  fromDate: Date,
+  toDate: Date,
+  facilityType: FacilityTypeEnum,
+  extraCharge: number,
+  extraChargePerPerson: number,
+}
+export interface DiscountOnCountDto {
+  discountPercent: number,
+  count: number
+}
+
 export interface DistrictDto {
   id: number,
   name: string,
